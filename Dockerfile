@@ -8,8 +8,9 @@ RUN npm run build
 
 # production environment
 FROM nginx:stable-alpine
-COPY --from=build /app/build /usr/share/nginx/html
+RUN rm -rf /etc/nginx/conf.d
 COPY conf /etc/nginx
+COPY --from=build /usr/src/app/build /usr/share/nginx/html
 WORKDIR /usr/share/nginx/html
 RUN apk add --no-cache bash
 CMD ["nginx", "-g", "daemon off;"]
