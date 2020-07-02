@@ -1,0 +1,37 @@
+.GameList {
+    max-width: 500px;
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+    padding: 1px;
+}
+.GameButton{
+    margin: 10px;
+    width: 40%;
+}
+.GameCenter{
+    margin: auto;
+    margin-top: 100px;
+    text-align: center;
+}
+.GameCenterButton{
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.GameDesc {
+    height: 100%;
+    text-align: center;
+}
+.Game {
+    margin-top: 50px;
+}
+.NewComment {
+    width: 80%;
+    max-width: 500px;
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+}

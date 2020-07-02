@@ -1,0 +1,9 @@
+.NewGame {
+    width: 80%;
+    max-width: 500px;
+    margin: auto;
+    margin-top: 50px;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+}
