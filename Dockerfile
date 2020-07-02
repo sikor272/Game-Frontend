@@ -1,16 +1,20 @@
-FROM node:12.16.2-alpine3.11 as build
-WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
+# pull official base image
+FROM node:13.12.0-alpine
 
+# set working directory
+WORKDIR /app
 
-FROM nginx:stable-alpine
-RUN rm -rf /etc/nginx/conf.d
-COPY conf /etc/nginx
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
-WORKDIR /usr/share/nginx/html
-RUN apk add --no-cache bash
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
-CMD ["/bin/bash", "-c", "nginx -g \"daemon off;\""]
+# install app dependencies
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install --silent
+RUN npm install react-scripts@3.4.1 -g --silent
+
+# add app
+COPY . ./
+
+# start app
+CMD ["npm", "start"]
