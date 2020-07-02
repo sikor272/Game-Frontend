@@ -13,4 +13,4 @@ COPY --from=build /usr/src/app/build /usr/share/nginx/html
 WORKDIR /usr/share/nginx/html
 RUN apk add --no-cache bash
 
-CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
+CMD ["/bin/bash", "-c", "nginx -g \"daemon off;\""]
