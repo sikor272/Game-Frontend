@@ -12,7 +12,5 @@ COPY conf /etc/nginx
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
 WORKDIR /usr/share/nginx/html
 RUN apk add --no-cache bash
-RUN chmod +x env.sh
-
 
 CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
