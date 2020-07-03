@@ -1,18 +1,17 @@
-FROM node:12.16.2-alpine3.11 as build
+# build environment
+FROM node:13.12.0-alpine as build
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 COPY . .
+RUN npm install react-bootstrap bootstrap
 RUN npm run build
 
-
+# production environment
 FROM nginx:stable-alpine
 RUN rm -rf /etc/nginx/conf.d
 COPY conf /etc/nginx
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
 WORKDIR /usr/share/nginx/html
 RUN apk add --no-cache bash
-RUN chmod +x env.sh
-
-
-CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
+CMD ["nginx", "-g", "daemon off;"]
